@@ -1,18 +1,19 @@
--- ============================================================================
--- Q1.1: Find all customers and their orders
--- ============================================================================
-PRINT 'Q1.1: List all customers who have placed orders with order details';
-PRINT 'Expected output: customer_id, customer_name, order_id, order_date, amount';
 
 
 use InterviewL1_Joins
 
-SELECT
-    c.customer_id,
-    c.customer_name,
-    o.order_id,
-    o.order_date,
-    o.amount
+SELECT TABLE_NAME
+FROM INFORMATION_SCHEMA.TABLES;
+
+SELECT 
+customer_name,
+o.order_id,
+p.product_name,
+oi.quantity
 FROM Customers c
-INNER JOIN Orders o 
+JOIN Orders o
 ON c.customer_id = o.customer_id
+JOIN Order_Items oi
+on oi.order_id = o.order_id
+JOIN Products p
+on p.product_id = oi.product_id;
