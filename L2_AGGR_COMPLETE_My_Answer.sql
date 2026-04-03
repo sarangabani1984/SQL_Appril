@@ -28,3 +28,19 @@ ORDER BY avg_salary DESC;
 
 
 
+-- Q5.3: Find the highest-paid employee in each department (with their name and salary)
+
+with cte as (
+select 
+d.dept_name,
+e.emp_name,
+e.salary, RANK() OVER (PARTITION BY d.dept_name ORDER BY e.salary DESC) as salary_rank
+from Departments d
+join Employees e
+on d.dept_id = e.dept_id)
+
+SELECT * from cte WHERE salary_rank = 1 
+
+
+
+
